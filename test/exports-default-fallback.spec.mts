@@ -10,11 +10,14 @@ test('esm wrapper supports default-only dist export shape', async () => {
     const wrapperPath = join(tempDir, 'index.mjs');
     const fixturePath = join(tempDir, 'dist-fixture.mjs');
     const fixtureClassName = 'MockReactRefreshRspackPlugin';
+    const fixtureSource = `export default class ${fixtureClassName} {
+  constructor() {
+    this.options = { reactRefreshLoader: true };
+  }
+}
+`;
 
-    writeFileSync(
-      fixturePath,
-      `export default class ${fixtureClassName} {\n  constructor() {\n    this.options = { reactRefreshLoader: true };\n  }\n}\n`,
-    );
+    writeFileSync(fixturePath, fixtureSource);
     writeFileSync(
       wrapperPath,
       wrapperSource.replace('../dist/index.js', './dist-fixture.mjs'),
