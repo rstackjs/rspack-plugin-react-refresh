@@ -1,31 +1,23 @@
 # Rspack project
 
-## Setup
-
-Install the dependencies:
-
-```bash
-npm install
-```
-
 ## Get started
 
 Start the dev server, and the app will be available at <http://localhost:8080>.
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 Build the app for production:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 Preview the production build locally:
 
 ```bash
-npm run preview
+pnpm run preview
 ```
 
 ## Learn more
