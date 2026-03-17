@@ -55,8 +55,7 @@
     "typescript": "5.9.3"
   },
   "dependencies": {
-    "error-stack-parser": "^2.1.4",
-    "html-entities": "^2.6.0"
+    "error-stack-parser": "^2.1.4"
   },
   "peerDependencies": {
     "react-refresh": ">=0.10.0 <1.0.0",
