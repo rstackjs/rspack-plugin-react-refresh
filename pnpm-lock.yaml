@@ -11,9 +11,6 @@ importers:
       error-stack-parser:
         specifier: ^2.1.4
         version: 2.1.4
-      html-entities:
-        specifier: ^2.6.0
-        version: 2.6.0
       webpack-hot-middleware:
         specifier: 2.x
         version: 2.26.1
