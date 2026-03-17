@@ -1,0 +1,24 @@
+{
+  "name": "example",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "rspack dev",
+    "build": "rspack build",
+    "preview": "rspack preview"
+  },
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@rspack/cli": "2.0.0-beta.6",
+    "@rspack/core": "2.0.0-beta.6",
+    "@rspack/dev-server": "2.0.0-beta.7",
+    "@rspack/plugin-react-refresh": "workspace:*",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "react-refresh": "^0.18.0",
+    "typescript": "^5.9.3"
+  }
+}
