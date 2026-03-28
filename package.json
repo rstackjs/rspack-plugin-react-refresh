@@ -27,11 +27,7 @@
     "release": "node ./scripts/release.mjs",
     "bump": "npx bumpp --no-push --no-tag --no-commit"
   },
-  "files": [
-    "client",
-    "dist",
-    "exports"
-  ],
+  "files": ["client", "dist", "exports"],
   "simple-git-hooks": {
     "pre-commit": "npx nano-staged"
   },
