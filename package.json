@@ -52,7 +52,7 @@
     "semver": "7.7.4",
     "simple-git-hooks": "^2.13.1",
     "ts-node": "^10.9.2",
-    "typescript": "5.9.3"
+    "typescript": "^6.0.2"
   },
   "dependencies": {
     "error-stack-parser": "^2.1.4"
