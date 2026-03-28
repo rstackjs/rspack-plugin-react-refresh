@@ -18,8 +18,8 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "rslib build",
-    "dev": "rslib build -w",
+    "build": "rslib",
+    "dev": "rslib -w",
     "lint": "biome check .",
     "lint:write": "biome check . --write",
     "prepare": "simple-git-hooks && npm run build",
