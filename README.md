@@ -26,17 +26,8 @@ bun add @rspack/plugin-react-refresh react-refresh -D
 
 Import the plugin in your code:
 
-- ES modules:
-
 ```js
-// Named import (recommended)
-import { ReactRefreshRspackPlugin } from "@rspack/plugin-react-refresh";
-```
-
-- CommonJS:
-
-```js
-const ReactRefreshRspackPlugin = require("@rspack/plugin-react-refresh");
+import { ReactRefreshRspackPlugin } from '@rspack/plugin-react-refresh';
 ```
 
 ## Usage
@@ -47,27 +38,28 @@ Enabling [React Fast Refresh](https://reactnative.dev/docs/fast-refresh) functio
 - Code transformation can be added through loaders, such as [jsc.transform.react.refresh](https://swc.rs/docs/configuration/compilation#jsctransformreactrefresh) for [swc-loader](https://swc.rs/docs/usage/swc-loader) or the [react-refresh/babel](https://github.com/facebook/react/tree/main/packages/react-refresh) for [babel-loader](https://github.com/babel/babel-loader).
 
 ```js
-const ReactRefreshPlugin = require("@rspack/plugin-react-refresh");
-const isDev = process.env.NODE_ENV === "development";
+import { ReactRefreshRspackPlugin } from '@rspack/plugin-react-refresh';
 
-module.exports = {
+const isDev = process.env.NODE_ENV === 'development';
+
+export default {
   experiments: {
     rspackFuture: {
       disableTransformByDefault: true,
     },
   },
   // ...
-  mode: isDev ? "development" : "production",
+  mode: isDev ? 'development' : 'production',
   module: {
     rules: [
       {
         test: /\.jsx$/,
         use: {
-          loader: "builtin:swc-loader",
+          loader: 'builtin:swc-loader',
           options: {
             jsc: {
               parser: {
-                syntax: "ecmascript",
+                syntax: 'ecmascript',
                 jsx: true,
               },
               transform: {
@@ -82,7 +74,7 @@ module.exports = {
       },
     ],
   },
-  plugins: [isDev && new ReactRefreshPlugin()].filter(Boolean),
+  plugins: [isDev && new ReactRefreshRspackPlugin()].filter(Boolean),
 };
 ```
 
