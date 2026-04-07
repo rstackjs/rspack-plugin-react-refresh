@@ -2,8 +2,9 @@ import assert from 'node:assert';
 import fs from 'node:fs';
 import path from 'node:path';
 import { type Stats, rspack } from '@rspack/core';
-import ReactRefreshPlugin, {
+import {
   type PluginOptions,
+  ReactRefreshRspackPlugin,
 } from '@rspack/plugin-react-refresh';
 
 type Outputs = {
@@ -17,7 +18,7 @@ type CompilationCallback = (
   error: Error | null,
   stats: Stats | undefined,
   outputs: Outputs,
-  plugin: ReactRefreshPlugin,
+  plugin: ReactRefreshRspackPlugin,
 ) => void;
 
 const uniqueName = 'ReactRefreshLibrary';
@@ -32,7 +33,7 @@ const compileWithReactRefresh = (
   const mjsEntry = path.join(fixturePath, 'index.mjs');
   const customLoader = path.join(fixturePath, 'loader.js');
   const entry = fs.existsSync(cjsEntry) ? cjsEntry : mjsEntry;
-  const plugin = new ReactRefreshPlugin(refreshOptions);
+  const plugin = new ReactRefreshRspackPlugin(refreshOptions);
   rspack(
     {
       mode: 'development',

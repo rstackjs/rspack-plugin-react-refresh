@@ -109,4 +109,3 @@ class ReactRefreshRspackPlugin {
 }
 
 export { ReactRefreshRspackPlugin };
-export default ReactRefreshRspackPlugin;
