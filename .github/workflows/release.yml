@@ -5,9 +5,9 @@ on:
     inputs:
       tag:
         type: choice
-        description: "Release Npm Tag"
+        description: 'Release Npm Tag'
         required: true
-        default: "nightly"
+        default: 'nightly'
         options:
           - alpha
           - beta
@@ -18,7 +18,7 @@ on:
 
       dry_run:
         type: boolean
-        description: "DryRun release"
+        description: 'DryRun release'
         required: true
         default: false
 
@@ -44,7 +44,7 @@ jobs:
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
         with:
           node-version: 24.14.1
-          cache: "pnpm"
+          cache: 'pnpm'
 
       # Update npm to the latest version to enable OIDC
       - name: Update npm

@@ -57,10 +57,8 @@ class ReactRefreshRspackPlugin {
     if (this.options.injectLoader) {
       compiler.options.module.rules.unshift({
         test: this.options.test,
-        // biome-ignore lint: exists
         include: this.options.include!,
         exclude: {
-          // biome-ignore lint: exists
           or: [this.options.exclude!, [...getRefreshRuntimePaths()]].filter(
             Boolean,
           ),
