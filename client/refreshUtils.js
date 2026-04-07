@@ -1,5 +1,10 @@
 /* global __webpack_require__ */
-var Refresh = require('react-refresh/runtime');
+import {
+  getFamilyByType,
+  isLikelyComponentType,
+  performReactRefresh,
+  register,
+} from 'react-refresh/runtime';
 
 /**
  * Extracts exports from a webpack module object.
@@ -45,7 +50,7 @@ function getModuleExports(moduleId) {
  */
 function getReactRefreshBoundarySignature(moduleExports) {
   var signature = [];
-  signature.push(Refresh.getFamilyByType(moduleExports));
+  signature.push(getFamilyByType(moduleExports));
 
   if (moduleExports == null || typeof moduleExports !== 'object') {
     // Exit if we can't iterate over exports.
@@ -58,7 +63,7 @@ function getReactRefreshBoundarySignature(moduleExports) {
     }
 
     signature.push(key);
-    signature.push(Refresh.getFamilyByType(moduleExports[key]));
+    signature.push(getFamilyByType(moduleExports[key]));
   }
 
   return signature;
@@ -84,7 +89,7 @@ function createDebounceUpdate() {
     if (typeof refreshTimeout === 'undefined') {
       refreshTimeout = setTimeout(function () {
         refreshTimeout = undefined;
-        Refresh.performReactRefresh();
+        performReactRefresh();
         if (callback) {
           callback();
         }
@@ -103,7 +108,7 @@ function createDebounceUpdate() {
  * @returns {boolean} Whether the exports are React component like.
  */
 function isReactRefreshBoundary(moduleExports) {
-  if (Refresh.isLikelyComponentType(moduleExports)) {
+  if (isLikelyComponentType(moduleExports)) {
     return true;
   }
   if (
@@ -130,7 +135,7 @@ function isReactRefreshBoundary(moduleExports) {
     // without any side-effects attached.
     // Ref: https://github.com/webpack/webpack/blob/b93048643fe74de2a6931755911da1212df55897/lib/MainTemplate.js#L281
     var exportValue = moduleExports[key];
-    if (!Refresh.isLikelyComponentType(exportValue)) {
+    if (!isLikelyComponentType(exportValue)) {
       areAllExportsComponents = false;
     }
   }
@@ -147,9 +152,9 @@ function isReactRefreshBoundary(moduleExports) {
  * @returns {void}
  */
 function registerExportsForReactRefresh(moduleExports, moduleId) {
-  if (Refresh.isLikelyComponentType(moduleExports)) {
+  if (isLikelyComponentType(moduleExports)) {
     // Register module.exports if it is likely a component
-    Refresh.register(moduleExports, moduleId + ' %exports%');
+    register(moduleExports, moduleId + ' %exports%');
   }
 
   if (
@@ -168,9 +173,9 @@ function registerExportsForReactRefresh(moduleExports, moduleId) {
     }
 
     var exportValue = moduleExports[key];
-    if (Refresh.isLikelyComponentType(exportValue)) {
+    if (isLikelyComponentType(exportValue)) {
       var typeID = moduleId + ' %exports% ' + key;
-      Refresh.register(exportValue, typeID);
+      register(exportValue, typeID);
     }
   }
 }
@@ -273,11 +278,11 @@ function isUnrecoverableRuntimeError(error) {
   return error.message.startsWith('RuntimeError: factory is undefined');
 }
 
-module.exports = Object.freeze({
-  enqueueUpdate: enqueueUpdate,
-  executeRuntime: executeRuntime,
-  getModuleExports: getModuleExports,
-  isReactRefreshBoundary: isReactRefreshBoundary,
-  shouldInvalidateReactRefreshBoundary: shouldInvalidateReactRefreshBoundary,
-  registerExportsForReactRefresh: registerExportsForReactRefresh,
-});
+export {
+  enqueueUpdate,
+  executeRuntime,
+  getModuleExports,
+  isReactRefreshBoundary,
+  registerExportsForReactRefresh,
+  shouldInvalidateReactRefreshBoundary,
+};

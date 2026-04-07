@@ -1,13 +1,13 @@
 import type { Compiler } from '@rspack/core';
-import { normalizeOptions } from './options';
-import type { NormalizedPluginOptions, PluginOptions } from './options';
+import { normalizeOptions } from './options.js';
+import type { NormalizedPluginOptions, PluginOptions } from './options.js';
 import {
   getRefreshRuntimeDirPath,
   getRefreshRuntimePaths,
   reactRefreshEntryPath,
   reactRefreshPath,
   refreshUtilsPath,
-} from './paths';
+} from './paths.js';
 
 export type { PluginOptions };
 

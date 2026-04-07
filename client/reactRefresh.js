@@ -1,14 +1,17 @@
-const RefreshUtils = require('./refreshUtils');
-const RefreshRuntime = require('react-refresh/runtime');
+import {
+  createSignatureFunctionForTransform,
+  register,
+} from 'react-refresh/runtime';
+import { executeRuntime, getModuleExports } from './refreshUtils.js';
 
 function refresh(moduleId, webpackHot) {
-  const currentExports = RefreshUtils.getModuleExports(moduleId);
+  const currentExports = getModuleExports(moduleId);
   const fn = (exports) => {
     var testMode;
     if (typeof __react_refresh_test__ !== 'undefined') {
       testMode = __react_refresh_test__;
     }
-    RefreshUtils.executeRuntime(exports, moduleId, webpackHot, testMode);
+    executeRuntime(exports, moduleId, webpackHot, testMode);
   };
   if (typeof Promise !== 'undefined' && currentExports instanceof Promise) {
     currentExports.then(fn);
@@ -17,9 +20,4 @@ function refresh(moduleId, webpackHot) {
   }
 }
 
-module.exports = {
-  refresh,
-  register: RefreshRuntime.register,
-  createSignatureFunctionForTransform:
-    RefreshRuntime.createSignatureFunctionForTransform,
-};
+export { createSignatureFunctionForTransform, refresh, register };

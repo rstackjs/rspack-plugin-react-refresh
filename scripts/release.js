@@ -1,5 +1,5 @@
 import path from 'path';
-import * as url from 'url';
+import { fileURLToPath } from 'url';
 import cac from 'cac';
 import { $ } from 'execa';
 import fs from 'fs-extra';
@@ -16,7 +16,7 @@ cli.option('--tag <tag>', 'The npm tag to publish under (default: canary)', {
   default: 'canary',
 });
 
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const PKG_PATH = path.resolve(__dirname, '../package.json');
 const pkg = fs.readJsonSync(PKG_PATH);
 const publishVersion = pkg.version;

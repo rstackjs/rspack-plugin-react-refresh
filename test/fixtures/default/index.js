@@ -1,2 +1,3 @@
-require('foo');
-module.exports = 'default';
+import 'foo';
+
+export default 'default';

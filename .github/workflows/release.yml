@@ -60,8 +60,8 @@ jobs:
 
       - name: Dry run release to npm
         if: inputs.dry_run
-        run: node scripts/release.mjs --dry-run --tag ${{ inputs.tag }}
+        run: node scripts/release.js --dry-run --tag ${{ inputs.tag }}
 
       - name: Release to npm
         if: ${{ !inputs.dry_run }}
-        run: node scripts/release.mjs --tag ${{ inputs.tag }}
+        run: node scripts/release.js --tag ${{ inputs.tag }}

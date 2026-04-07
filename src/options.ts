@@ -56,7 +56,6 @@ export type PluginOptions = {
    * @default true
    */
   injectLoader?: boolean;
-
   /**
    * Whether to inject the client/reactRefreshEntry.js
    * @default true

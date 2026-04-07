@@ -1,1 +1,1 @@
-require('./foo?raw');
+import './foo.js?raw';

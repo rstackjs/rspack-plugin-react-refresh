@@ -43,12 +43,6 @@ import { ReactRefreshRspackPlugin } from '@rspack/plugin-react-refresh';
 const isDev = process.env.NODE_ENV === 'development';
 
 export default {
-  experiments: {
-    rspackFuture: {
-      disableTransformByDefault: true,
-    },
-  },
-  // ...
   mode: isDev ? 'development' : 'production',
   module: {
     rules: [
@@ -74,7 +68,7 @@ export default {
       },
     ],
   },
-  plugins: [isDev && new ReactRefreshRspackPlugin()].filter(Boolean),
+  plugins: [isDev && new ReactRefreshRspackPlugin()],
 };
 ```
 
