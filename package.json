@@ -38,8 +38,6 @@
     "@rspack/core": "2.0.0-rc.0",
     "@rstest/core": "^0.9.6",
     "@types/node": "^24.12.2",
-    "cac": "^7.0.0",
-    "execa": "9.6.1",
     "prettier": "^3.8.1",
     "react-refresh": "^0.18.0",
     "simple-git-hooks": "^2.13.1",
