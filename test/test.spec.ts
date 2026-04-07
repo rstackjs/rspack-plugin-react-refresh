@@ -90,7 +90,7 @@ const compileWithReactRefresh = (
         assert(stats, 'stats is not defined');
         const statsJson = stats.toJson({ all: true });
 
-        if (statsJson.errors.length > 0) {
+        if (statsJson.errors!.length > 0) {
           reject(
             new Error(
               `Compilation errors:\n${JSON.stringify(statsJson.errors, null, 2)}`,
@@ -99,7 +99,7 @@ const compileWithReactRefresh = (
           return;
         }
 
-        if (statsJson.warnings.length > 0) {
+        if (statsJson.warnings!.length > 0) {
           reject(
             new Error(
               `Compilation warnings:\n${JSON.stringify(statsJson.warnings, null, 2)}`,
@@ -255,9 +255,7 @@ describe('react-refresh-rspack-plugin', () => {
         injectEntry: false,
       },
     );
-    expect(reactRefresh).not.toContain(
-      'RefreshRuntime.injectIntoGlobalHook(safeThis)',
-    );
+    expect(reactRefresh).not.toContain('injectIntoGlobalHook(safeThis)');
   });
 
   it('should always exclude react-refresh related modules', async () => {
