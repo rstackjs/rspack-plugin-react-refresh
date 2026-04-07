@@ -1,1 +1,1 @@
-require('foo');
+import 'foo';

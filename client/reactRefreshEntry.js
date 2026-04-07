@@ -1,4 +1,5 @@
-var RefreshRuntime = require('react-refresh/runtime');
+import { injectIntoGlobalHook } from 'react-refresh/runtime';
+
 var safeThis = (function () {
   // copied from core-js-pure/features/global-this
   'use strict';
@@ -37,7 +38,7 @@ if (process.env.NODE_ENV !== 'production') {
 
     // Only inject the runtime if it hasn't been injected
     if (!safeThis[$RefreshInjected$]) {
-      RefreshRuntime.injectIntoGlobalHook(safeThis);
+      injectIntoGlobalHook(safeThis);
 
       // Empty implementation to avoid "ReferenceError: variable is not defined" in module which didn't pass builtin:react-refresh-loader
       safeThis.$RefreshSig$ = () => (type) => type;
