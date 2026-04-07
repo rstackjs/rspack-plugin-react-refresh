@@ -10,16 +10,5 @@ export default defineConfig({
         tsconfigPath: './tsconfig.build.json',
       },
     },
-    {
-      format: 'cjs',
-      bundle: false,
-      source: {
-        entry: {
-          index: './src/sockets/**',
-        },
-        tsconfigPath: './tsconfig.build.json',
-      },
-      outBase: './src',
-    },
   ],
 });

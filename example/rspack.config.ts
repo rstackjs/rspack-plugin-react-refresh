@@ -51,10 +51,6 @@ export default defineConfig({
     new rspack.HtmlRspackPlugin({
       template: './index.html',
     }),
-    isDev
-      ? new ReactRefreshRspackPlugin({
-          overlay: true,
-        })
-      : null,
+    isDev ? new ReactRefreshRspackPlugin() : null,
   ],
 });

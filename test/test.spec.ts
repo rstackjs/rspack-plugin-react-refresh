@@ -278,24 +278,6 @@ describe('react-refresh-rspack-plugin', () => {
     });
   });
 
-  it('should include entries for webpack-hot-middleware', () => {
-    return new Promise<void>((done) => {
-      compileWithReactRefresh(
-        path.join(__dirname, 'fixtures/custom'),
-        {
-          overlay: {
-            sockIntegration: 'whm',
-          },
-        },
-        (_, __, { fixture }) => {
-          expect(fixture).toContain('webpack-hot-middleware/client');
-          expect(fixture).toContain('WHMEventSource.js');
-          done();
-        },
-      );
-    });
-  });
-
   it('should instrument the module with builtin:react-refresh-loader', () => {
     return new Promise<void>((done) => {
       compileWithReactRefresh(
