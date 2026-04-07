@@ -1,67 +1,47 @@
-name: Release Full
+# This action will publish the package to npm and create a GitHub release.
+name: Release
 
 on:
-  workflow_dispatch:
-    inputs:
-      tag:
-        type: choice
-        description: 'Release Npm Tag'
-        required: true
-        default: 'nightly'
-        options:
-          - alpha
-          - beta
-          - canary
-          - latest
-          - nightly
-          - rc
+  # Run `npm run bump` to bump the version and create a git tag.
+  push:
+    tags:
+      - 'v*'
 
-      dry_run:
-        type: boolean
-        description: 'DryRun release'
-        required: true
-        default: false
+  workflow_dispatch:
 
 permissions:
   contents: write
-  # To publish packages with provenance
   id-token: write
 
 jobs:
-  release:
-    name: Release
-    environment: npm
+  publish:
     runs-on: ubuntu-latest
-
+    environment: npm
     steps:
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-
-      - name: Install Pnpm
-        run: npm i -g corepack@latest --force && corepack enable
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
+        uses: actions/setup-node@v6
         with:
-          node-version: 24.14.1
-          cache: 'pnpm'
+          node-version: 24
 
-      # Update npm to the latest version to enable OIDC
-      - name: Update npm
+      - name: Setup Package Managers
         run: |
-          npm install -g npm@latest
-          npm --version
+          npm install -g corepack@latest --force
+          corepack enable
 
       - name: Install Dependencies
         run: pnpm install
 
-      - name: Run Test
-        run: pnpm run test
+      - name: Publish
+        uses: JS-DevTools/npm-publish@v4
+        with:
+          token: empty
 
-      - name: Dry run release to npm
-        if: inputs.dry_run
-        run: node scripts/release.js --dry-run --tag ${{ inputs.tag }}
-
-      - name: Release to npm
-        if: ${{ !inputs.dry_run }}
-        run: node scripts/release.js --tag ${{ inputs.tag }}
+      - name: Create GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          # TODO: remove beta tag before release stable
+          tag: beta
+          generateReleaseNotes: 'true'
