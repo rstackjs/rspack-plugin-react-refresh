@@ -2,7 +2,7 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "rootDir": "./",
-    "types": ["@rstest/core/globals"]
+    "types": ["@rstest/core/globals", "node"]
   },
   "include": ["./**/*.ts"]
 }
