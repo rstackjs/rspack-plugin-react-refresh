@@ -2,7 +2,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import cac from 'cac';
 import { $ } from 'execa';
-import fs from 'fs-extra';
+import fs from 'node:fs';
 
 let cli = cac('release');
 cli.option(
@@ -18,7 +18,7 @@ cli.option('--tag <tag>', 'The npm tag to publish under (default: canary)', {
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const PKG_PATH = path.resolve(__dirname, '../package.json');
-const pkg = fs.readJsonSync(PKG_PATH);
+const pkg = JSON.parse(fs.readFileSync(PKG_PATH, 'utf8'));
 const publishVersion = pkg.version;
 
 const parsed = cli.parse();
