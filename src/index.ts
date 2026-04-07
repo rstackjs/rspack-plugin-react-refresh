@@ -4,15 +4,10 @@ import type { NormalizedPluginOptions, PluginOptions } from './options';
 import {
   getRefreshRuntimeDirPath,
   getRefreshRuntimePaths,
+  reactRefreshEntryPath,
   reactRefreshPath,
   refreshUtilsPath,
 } from './paths';
-import { getAdditionalEntries } from './utils/getAdditionalEntries';
-import { getIntegrationEntry } from './utils/getIntegrationEntry';
-import {
-  type IntegrationType,
-  getSocketIntegration,
-} from './utils/getSocketIntegration';
 
 export type { PluginOptions };
 
@@ -20,14 +15,6 @@ function addEntry(entry: string, compiler: Compiler) {
   new compiler.rspack.EntryPlugin(compiler.context, entry, {
     name: undefined,
   }).apply(compiler);
-}
-
-function addSocketEntry(sockIntegration: IntegrationType, compiler: Compiler) {
-  const integrationEntry = getIntegrationEntry(sockIntegration);
-
-  if (integrationEntry) {
-    addEntry(integrationEntry, compiler);
-  }
 }
 
 const PLUGIN_NAME = 'ReactRefreshRspackPlugin';
@@ -59,26 +46,8 @@ class ReactRefreshRspackPlugin {
       return;
     }
 
-    const addEntries = getAdditionalEntries({
-      devServer: compiler.options.devServer,
-      options: this.options,
-    });
-
     if (this.options.injectEntry) {
-      for (const entry of addEntries.prependEntries) {
-        addEntry(entry, compiler);
-      }
-    }
-
-    if (
-      this.options.overlay !== false &&
-      this.options.overlay.sockIntegration
-    ) {
-      addSocketEntry(this.options.overlay.sockIntegration, compiler);
-    }
-
-    for (const entry of addEntries.overlayEntries) {
-      addEntry(entry, compiler);
+      addEntry(reactRefreshEntryPath, compiler);
     }
 
     new compiler.rspack.ProvidePlugin({
@@ -120,23 +89,6 @@ class ReactRefreshRspackPlugin {
     const providedModules: Record<string, string> = {
       __react_refresh_utils__: refreshUtilsPath,
     };
-    if (this.options.overlay === false) {
-      // Stub errorOverlay module so their calls can be erased
-      definedModules.__react_refresh_error_overlay__ = false;
-      definedModules.__react_refresh_socket__ = false;
-    } else {
-      if (this.options.overlay.module) {
-        providedModules.__react_refresh_error_overlay__ = require.resolve(
-          this.options.overlay.module,
-        );
-      }
-
-      if (this.options.overlay.sockIntegration) {
-        providedModules.__react_refresh_socket__ = getSocketIntegration(
-          this.options.overlay.sockIntegration,
-        );
-      }
-    }
     new compiler.rspack.DefinePlugin(definedModules).apply(compiler);
     new compiler.rspack.ProvidePlugin(providedModules).apply(compiler);
 

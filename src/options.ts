@@ -1,16 +1,4 @@
-import path from 'node:path';
 import type { RuleSetCondition } from '@rspack/core';
-import type { IntegrationType } from './utils/getSocketIntegration';
-
-interface OverlayOptions {
-  entry: string;
-  module: string;
-  sockIntegration: IntegrationType | false;
-  sockHost?: string;
-  sockPath?: string;
-  sockPort?: string;
-  sockProtocol?: string;
-}
 
 export type PluginOptions = {
   /**
@@ -64,12 +52,6 @@ export type PluginOptions = {
    */
   forceEnable?: boolean;
   /**
-   * Modify the behavior of the error overlay.
-   * @default false
-   */
-  overlay?: boolean | Partial<OverlayOptions>;
-
-  /**
    * Whether to inject the builtin:react-refresh-loader
    * @default true
    */
@@ -92,9 +74,7 @@ export type PluginOptions = {
   reactRefreshLoader?: string;
 };
 
-export interface NormalizedPluginOptions extends Required<PluginOptions> {
-  overlay: false | OverlayOptions;
-}
+export type NormalizedPluginOptions = Required<PluginOptions>;
 
 const d = <K extends keyof PluginOptions>(
   object: PluginOptions,
@@ -111,25 +91,6 @@ const d = <K extends keyof PluginOptions>(
   return object[property];
 };
 
-const normalizeOverlay = (options: PluginOptions['overlay']) => {
-  const defaultOverlay: OverlayOptions = {
-    entry: path.join(__dirname, '../client/errorOverlayEntry.js'),
-    module: path.join(__dirname, '../client/overlay/index.js'),
-    sockIntegration: 'wds',
-  };
-  if (!options) {
-    return false;
-  }
-  if (typeof options === 'undefined' || options === true) {
-    return defaultOverlay;
-  }
-  options.entry = options.entry ?? defaultOverlay.entry;
-  options.module = options.module ?? defaultOverlay.module;
-  options.sockIntegration =
-    options.sockIntegration ?? defaultOverlay.sockIntegration;
-  return options;
-};
-
 export function normalizeOptions(
   options: PluginOptions,
 ): NormalizedPluginOptions {
@@ -141,6 +102,5 @@ export function normalizeOptions(
   d(options, 'injectEntry', true);
   d(options, 'reloadOnRuntimeErrors', false);
   d(options, 'reactRefreshLoader', 'builtin:react-refresh-loader');
-  options.overlay = normalizeOverlay(options.overlay);
   return options as NormalizedPluginOptions;
 }

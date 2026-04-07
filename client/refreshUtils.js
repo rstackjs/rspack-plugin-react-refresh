@@ -76,8 +76,8 @@ function createDebounceUpdate() {
   var refreshTimeout;
 
   /**
-   * Performs react refresh on a delay and clears the error overlay.
-   * @param {function(): void} callback
+   * Performs react refresh on a delay.
+   * @param {function(): void} [callback]
    * @returns {void}
    */
   function enqueueUpdate(callback) {
@@ -85,7 +85,9 @@ function createDebounceUpdate() {
       refreshTimeout = setTimeout(function () {
         refreshTimeout = undefined;
         Refresh.performReactRefresh();
-        callback();
+        if (callback) {
+          callback();
+        }
       }, 30);
     }
   }
@@ -200,13 +202,7 @@ function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
 
 var enqueueUpdate = createDebounceUpdate();
 
-function executeRuntime(
-  moduleExports,
-  moduleId,
-  webpackHot,
-  refreshOverlay,
-  isTest,
-) {
+function executeRuntime(moduleExports, moduleId, webpackHot, isTest) {
   registerExportsForReactRefresh(moduleExports, moduleId);
 
   if (webpackHot) {
@@ -245,10 +241,6 @@ function executeRuntime(
             return;
           }
 
-          if (typeof refreshOverlay !== 'undefined' && refreshOverlay) {
-            refreshOverlay.handleRuntimeError(error);
-          }
-
           if (typeof isTest !== 'undefined' && isTest) {
             if (window.onHotAcceptError) {
               window.onHotAcceptError(error.message);
@@ -266,17 +258,7 @@ function executeRuntime(
         ) {
           webpackHot.invalidate();
         } else {
-          enqueueUpdate(
-            /**
-             * A function to dismiss the error overlay after performing React refresh.
-             * @returns {void}
-             */
-            function updateCallback() {
-              if (typeof refreshOverlay !== 'undefined' && refreshOverlay) {
-                refreshOverlay.clearRuntimeErrors();
-              }
-            },
-          );
+          enqueueUpdate();
         }
       }
     } else {

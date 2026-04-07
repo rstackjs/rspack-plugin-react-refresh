@@ -185,33 +185,6 @@ Sets a namespace for the React Refresh runtime.
 
 It is most useful when multiple instances of React Refresh is running together simultaneously.
 
-### overlay
-
-- Type: `boolean | OverlayOptions`
-- Default: `false`
-
-Modify the behavior of the error overlay.
-
-Checkout [OverlayOptions](https://github.com/rstackjs/rspack-plugin-react-refresh/blob/main/src/options.ts#L4) type signature for more details.
-
-- Enable the error overlay:
-
-```js
-new ReactRefreshPlugin({
-  overlay: true,
-});
-```
-
-- Configure the error overlay:
-
-```js
-new ReactRefreshPlugin({
-  overlay: {
-    // ...
-  },
-});
-```
-
 ### reloadOnRuntimeErrors
 
 - Type: `boolean`
