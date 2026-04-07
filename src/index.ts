@@ -22,13 +22,6 @@ const PLUGIN_NAME = 'ReactRefreshRspackPlugin';
 class ReactRefreshRspackPlugin {
   options: NormalizedPluginOptions;
 
-  /**
-   * @deprecated
-   */
-  static get deprecated_runtimePaths() {
-    return getRefreshRuntimePaths();
-  }
-
   constructor(options: PluginOptions = {}) {
     this.options = normalizeOptions(options);
   }
