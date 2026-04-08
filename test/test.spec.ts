@@ -65,7 +65,7 @@ const compileWithReactRefresh = (
           splitChunks: {
             cacheGroups: {
               reactRefresh: {
-                test: /[\\/](react-refresh|plugin-react-refresh\/client)[\\/]/,
+                test: /[\\/](react-refresh|rspack-plugin-react-refresh\/client)[\\/]/,
                 name: 'react-refresh',
                 chunks: 'all',
                 priority: -1000,
