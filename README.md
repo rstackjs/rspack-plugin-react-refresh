@@ -104,7 +104,7 @@ new ReactRefreshPlugin({
 ### include
 
 - Type: [Rspack.RuleSetCondition](https://rspack.rs/config/module-rules#condition)
-- Default: `/\.([cm]js|[jt]sx?|flow)$/i`
+- Default: `/\.(?:js|jsx|mjs|cjs|ts|tsx|mts|cts)$/`
 
 Explicitly includes files to be processed by the React Refresh loader. This option is passed to the `builtin:react-refresh-loader` as the `rule.include` condition.
 
