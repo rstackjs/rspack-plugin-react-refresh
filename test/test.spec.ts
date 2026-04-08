@@ -12,6 +12,7 @@ type Outputs = {
   fixture: string;
   runtime: string;
   vendor: string;
+  css?: string;
 };
 
 type CompilationResult = {
@@ -22,6 +23,10 @@ type CompilationResult = {
 };
 
 const uniqueName = 'ReactRefreshLibrary';
+const readOutput = (fixturePath: string, file: string) =>
+  fs.existsSync(path.join(fixturePath, 'dist', file))
+    ? fs.readFileSync(path.join(fixturePath, 'dist', file), 'utf-8')
+    : '';
 
 const compileWithReactRefresh = (
   fixturePath: string,
@@ -32,7 +37,9 @@ const compileWithReactRefresh = (
     const cjsEntry = path.join(fixturePath, 'index.js');
     const ctsEntry = path.join(fixturePath, 'index.cjs');
     const mjsEntry = path.join(fixturePath, 'index.mjs');
-    const customLoader = path.join(fixturePath, 'loader.cjs');
+    const customLoader = fs.existsSync(path.join(fixturePath, 'loader.cjs'))
+      ? path.join(fixturePath, 'loader.cjs')
+      : path.join(import.meta.dirname, 'fixtures/loader/loader.cjs');
     const entry = fs.existsSync(cjsEntry)
       ? cjsEntry
       : fs.existsSync(ctsEntry)
@@ -51,6 +58,14 @@ const compileWithReactRefresh = (
           path: dist,
           uniqueName,
           assetModuleFilename: '[name][ext]',
+        },
+        module: {
+          rules: [
+            {
+              test: /\.css$/,
+              type: 'css/auto',
+            },
+          ],
         },
         resolveLoader: {
           alias: {
@@ -112,22 +127,11 @@ const compileWithReactRefresh = (
           error,
           stats,
           outputs: {
-            reactRefresh: fs.readFileSync(
-              path.join(fixturePath, 'dist', 'react-refresh.js'),
-              'utf-8',
-            ),
-            fixture: fs.readFileSync(
-              path.join(fixturePath, 'dist', 'fixture.js'),
-              'utf-8',
-            ),
-            runtime: fs.readFileSync(
-              path.join(fixturePath, 'dist', 'runtime.js'),
-              'utf-8',
-            ),
-            vendor: fs.readFileSync(
-              path.join(fixturePath, 'dist', 'vendor.js'),
-              'utf-8',
-            ),
+            reactRefresh: readOutput(fixturePath, 'react-refresh.js'),
+            fixture: readOutput(fixturePath, 'fixture.js'),
+            runtime: readOutput(fixturePath, 'runtime.js'),
+            vendor: readOutput(fixturePath, 'vendor.js'),
+            css: readOutput(fixturePath, 'fixture.css') || undefined,
           },
           plugin,
         });
@@ -300,5 +304,20 @@ describe('react-refresh-rspack-plugin', () => {
     );
     expect(fixture).toContain('TEST_LOADER');
     expect(fixture).not.toContain('function $RefreshReg$');
+  });
+
+  it('should keep the default extension filter when include targets a directory', async () => {
+    const {
+      outputs: { fixture, css },
+    } = await compileWithReactRefresh(
+      path.join(import.meta.dirname, 'fixtures/include'),
+      {
+        include: path.join(import.meta.dirname, 'fixtures/include'),
+        reactRefreshLoader: 'custom-react-refresh-loader',
+      },
+    );
+    expect(fixture).toContain('TEST_LOADER');
+    expect(css).toBeDefined();
+    expect(css).not.toContain('TEST_LOADER');
   });
 });
