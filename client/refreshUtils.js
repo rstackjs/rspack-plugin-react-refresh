@@ -214,7 +214,7 @@ function executeRuntime(moduleExports, moduleId, hot, isTest) {
 
     if (isReactRefreshBoundary(moduleExports)) {
       /**
-       * A callback to performs a full refresh if React has unrecoverable errors,
+       * A callback to perform a full refresh if React has unrecoverable errors,
        * and also caches the to-be-disposed module.
        * @param {*} data A hot module data object from Rspack HMR.
        * @returns {void}
