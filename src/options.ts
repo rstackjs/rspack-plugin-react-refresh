@@ -13,7 +13,7 @@ export type PluginOptions = {
    * This option is passed to the `builtin:react-refresh-loader` as the `rule.include` condition.
    * Use this to limit processing to specific directories or file patterns.
    * Works identically to Rspack's `rule.include` option.
-   * @default /\.([cm]js|[jt]sx?|flow)$/i
+   * @default /\.(?:js|jsx|mjs|cjs|ts|tsx|mts|cts)$/
    * @see https://rspack.rs/config/module-rules#rulesinclude
    */
   include?: RuleSetCondition | null;
@@ -94,7 +94,7 @@ export function normalizeOptions(
   options: PluginOptions,
 ): NormalizedPluginOptions {
   d(options, 'exclude', /node_modules/i);
-  d(options, 'include', /\.([cm]js|[jt]sx?|flow)$/i);
+  d(options, 'include', /\.(?:js|jsx|mjs|cjs|ts|tsx|mts|cts)$/);
   d(options, 'library');
   d(options, 'forceEnable', false);
   d(options, 'injectLoader', true);
