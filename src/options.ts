@@ -5,6 +5,7 @@ export type PluginOptions = {
    * Specifies which files should be processed by the React Refresh loader.
    * This option is passed to the `builtin:react-refresh-loader` as the `rule.test` condition.
    * Works identically to Rspack's `rule.test` option.
+   * @default /\.(?:js|jsx|mjs|cjs|ts|tsx|mts|cts)$/
    * @see https://rspack.rs/config/module-rules#rulestest
    */
   test?: RuleSetCondition;
@@ -13,7 +14,7 @@ export type PluginOptions = {
    * This option is passed to the `builtin:react-refresh-loader` as the `rule.include` condition.
    * Use this to limit processing to specific directories or file patterns.
    * Works identically to Rspack's `rule.include` option.
-   * @default /\.(?:js|jsx|mjs|cjs|ts|tsx|mts|cts)$/
+   * @default undefined
    * @see https://rspack.rs/config/module-rules#rulesinclude
    */
   include?: RuleSetCondition | null;
@@ -93,8 +94,8 @@ const d = <K extends keyof PluginOptions>(
 export function normalizeOptions(
   options: PluginOptions,
 ): NormalizedPluginOptions {
+  d(options, 'test', /\.(?:js|jsx|mjs|cjs|ts|tsx|mts|cts)$/);
   d(options, 'exclude', /node_modules/i);
-  d(options, 'include', /\.(?:js|jsx|mjs|cjs|ts|tsx|mts|cts)$/);
   d(options, 'library');
   d(options, 'forceEnable', false);
   d(options, 'injectLoader', true);
