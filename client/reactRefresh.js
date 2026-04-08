@@ -4,14 +4,14 @@ import {
 } from 'react-refresh/runtime';
 import { executeRuntime, getModuleExports } from './refreshUtils.js';
 
-function refresh(moduleId, webpackHot) {
+function refresh(moduleId, hot) {
   const currentExports = getModuleExports(moduleId);
   const fn = (exports) => {
     var testMode;
     if (typeof __react_refresh_test__ !== 'undefined') {
       testMode = __react_refresh_test__;
     }
-    executeRuntime(exports, moduleId, webpackHot, testMode);
+    executeRuntime(exports, moduleId, hot, testMode);
   };
   if (typeof Promise !== 'undefined' && currentExports instanceof Promise) {
     currentExports.then(fn);
