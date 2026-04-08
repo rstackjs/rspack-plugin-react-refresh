@@ -6,17 +6,17 @@ import { executeRuntime, getModuleExports } from './refreshUtils.js';
 
 function refresh(moduleId, hot) {
   const currentExports = getModuleExports(moduleId);
-  const fn = (exports) => {
-    var testMode;
-    if (typeof __react_refresh_test__ !== 'undefined') {
-      testMode = __react_refresh_test__;
-    }
-    executeRuntime(exports, moduleId, hot, testMode);
+  const runRefresh = (moduleExports) => {
+    const testMode =
+      typeof __react_refresh_test__ !== 'undefined'
+        ? __react_refresh_test__
+        : undefined;
+    executeRuntime(moduleExports, moduleId, hot, testMode);
   };
   if (typeof Promise !== 'undefined' && currentExports instanceof Promise) {
-    currentExports.then(fn);
+    currentExports.then(runRefresh);
   } else {
-    fn(currentExports);
+    runRefresh(currentExports);
   }
 }
 
