@@ -79,7 +79,7 @@ function createDebounceUpdate() {
   let refreshTimeout;
 
   /**
-   * Performs react refresh on a delay.
+   * Performs React Refresh on a delay.
    * @param {function(): void} [callback]
    * @returns {void}
    */
