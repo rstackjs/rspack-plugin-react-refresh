@@ -37,10 +37,10 @@ import { ReactRefreshRspackPlugin } from '@rspack/plugin-react-refresh';
 
 ## Usage
 
-Enabling [React Fast Refresh](https://reactnative.dev/docs/fast-refresh) functionality primarily involves two aspects: code injection and code transformation.
+To enable [React Fast Refresh](https://reactnative.dev/docs/fast-refresh), you need both runtime injection and source transformation.
 
-- Code injection will inject some code from the [react-refresh](https://www.npmjs.com/package/react-refresh) package, as well as some custom runtime code, all of which are integrated in this plugin and can be injected through.
-- Code transformation can be added through loaders, such as [jsc.transform.react.refresh](https://swc.rs/docs/configuration/compilation#jsctransformreactrefresh) for [swc-loader](https://swc.rs/docs/usage/swc-loader) or the [react-refresh/babel](https://github.com/facebook/react/tree/main/packages/react-refresh) for [babel-loader](https://github.com/babel/babel-loader).
+- This plugin handles runtime injection, including code from [react-refresh](https://www.npmjs.com/package/react-refresh) and the custom runtime it requires.
+- Source transformation should be enabled in your loader, for example with [jsc.transform.react.refresh](https://swc.rs/docs/configuration/compilation#jsctransformreactrefresh) in [swc-loader](https://rspack.rs/guide/features/builtin-swc-loader).
 
 ```js
 import { ReactRefreshRspackPlugin } from '@rspack/plugin-react-refresh';
@@ -52,15 +52,12 @@ export default {
   module: {
     rules: [
       {
-        test: /\.jsx$/,
+        test: /\.(?:js|jsx|mjs|cjs|ts|tsx|mts|cts)$/,
         use: {
           loader: 'builtin:swc-loader',
           options: {
+            detectSyntax: 'auto',
             jsc: {
-              parser: {
-                syntax: 'ecmascript',
-                jsx: true,
-              },
               transform: {
                 react: {
                   development: isDev,
@@ -81,8 +78,8 @@ Compared to the previous approach, this method decouples the React Fast Refresh 
 
 ## Example
 
-- For usage with `builtin:swc-loader`, you can refer to the example at [examples/react-refresh](https://github.com/rstackjs/rspack-examples/tree/main/rspack/react-refresh/rspack.config.js), When using with `swc-loader`, simply replace `builtin:swc-loader` with `swc-loader`.
-- For usage with `babel-loader`, you can refer to the example at [examples/react-refresh-babel-loader](https://github.com/rstackjs/rspack-examples/tree/main/rspack/react-refresh-babel-loader/rspack.config.js)
+- For usage with `builtin:swc-loader`, you can refer to the example at [examples/react-refresh](https://github.com/rstackjs/rstack-examples/blob/main/rspack/react-refresh/rspack.config.js), When using with `swc-loader`, simply replace `builtin:swc-loader` with `swc-loader`.
+- For usage with `babel-loader`, you can refer to the example at [examples/react-refresh-babel-loader](https://github.com/rstackjs/rstack-examples/blob/main/rspack/react-refresh-babel-loader/rspack.config.js)
 
 ## Options
 
