@@ -37,11 +37,11 @@ jobs:
       - name: Publish
         uses: JS-DevTools/npm-publish@v4
         with:
+          # TODO: remove beta tag before release stable
+          tag: beta
           token: empty
 
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1
         with:
-          # TODO: remove beta tag before release stable
-          tag: beta
           generateReleaseNotes: 'true'
