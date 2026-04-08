@@ -60,6 +60,7 @@ export default {
             jsc: {
               transform: {
                 react: {
+                  runtime: 'automatic',
                   development: isDev,
                   refresh: isDev,
                 },
