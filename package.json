@@ -33,15 +33,15 @@
     "pre-commit": "pnpm run lint:write"
   },
   "devDependencies": {
-    "@rslib/core": "^0.21.0",
-    "@rslint/core": "^0.4.1",
-    "@rspack/core": "2.0.0-rc.1",
-    "@rstest/core": "^0.9.7",
+    "@rslib/core": "^0.21.2",
+    "@rslint/core": "^0.4.2",
+    "@rspack/core": "2.0.0-rc.3",
+    "@rstest/core": "^0.9.8",
     "@types/node": "^24.12.2",
-    "prettier": "^3.8.2",
+    "prettier": "^3.8.3",
     "react-refresh": "^0.18.0",
     "simple-git-hooks": "^2.13.1",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.3"
   },
   "peerDependencies": {
     "@rspack/core": "^2.0.0-0",
