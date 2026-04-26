@@ -33,10 +33,10 @@
     "pre-commit": "pnpm run lint:write"
   },
   "devDependencies": {
-    "@rslib/core": "^0.21.2",
-    "@rslint/core": "^0.4.2",
-    "@rspack/core": "2.0.0-rc.3",
-    "@rstest/core": "^0.9.8",
+    "@rslib/core": "^0.21.3",
+    "@rslint/core": "^0.5.0",
+    "@rspack/core": "2.0.0",
+    "@rstest/core": "^0.9.9",
     "@types/node": "^24.12.2",
     "prettier": "^3.8.3",
     "react-refresh": "^0.18.0",
@@ -52,7 +52,7 @@
       "optional": true
     }
   },
-  "packageManager": "pnpm@10.33.0",
+  "packageManager": "pnpm@10.33.2",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
