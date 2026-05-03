@@ -34,9 +34,9 @@
   },
   "devDependencies": {
     "@rslib/core": "^0.21.3",
-    "@rslint/core": "^0.5.0",
-    "@rspack/core": "2.0.0",
-    "@rstest/core": "^0.9.9",
+    "@rslint/core": "^0.5.1",
+    "@rspack/core": "2.0.1",
+    "@rstest/core": "^0.9.10",
     "@types/node": "^24.12.2",
     "prettier": "^3.8.3",
     "react-refresh": "^0.18.0",
