@@ -1,2 +1,6 @@
 packages:
   - example
+
+allowBuilds:
+  core-js: false
+  simple-git-hooks: false
