@@ -20,7 +20,7 @@
     "dev": "rslib -w",
     "lint": "rslint && prettier -c .",
     "lint:write": "rslint --fix && prettier -w .",
-    "prepare": "simple-git-hooks && npm run build",
+    "prepare": "simple-git-hooks",
     "test": "rstest",
     "release": "node ./scripts/release.js",
     "bump": "npx bumpp --no-push --no-tag --no-commit"
