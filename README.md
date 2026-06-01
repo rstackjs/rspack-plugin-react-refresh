@@ -119,13 +119,13 @@ new ReactRefreshPlugin({
 ### exclude
 
 - Type: [Rspack.RuleSetCondition](https://rspack.rs/config/module-rules#condition)
-- Default: `/node_modules/`
+- Default: `/[\\/]node_modules[\\/]/`
 
 Exclude files from being processed by the plugin. The value is the same as the [rule.exclude](https://rspack.rs/config/module-rules#rulesexclude) option in Rspack.
 
 ```js
 new ReactRefreshPlugin({
-  exclude: [/node_modules/, /some-other-module/],
+  exclude: [/[\\/]node_modules[\\/]/, /some-other-module/],
 });
 ```
 

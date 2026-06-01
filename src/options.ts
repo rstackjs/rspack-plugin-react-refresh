@@ -21,7 +21,7 @@ export type PluginOptions = {
   /**
    * Exclude files from being processed by the plugin.
    * The value is the same as the `rule.exclude` option in Rspack.
-   * @default /node_modules/
+   * @default /[\\/]node_modules[\\/]/
    * @see https://rspack.rs/config/module-rules#rulesexclude
    */
   exclude?: RuleSetCondition | null;
@@ -95,7 +95,7 @@ export function normalizeOptions(
   options: PluginOptions,
 ): NormalizedPluginOptions {
   d(options, 'test', /\.(?:js|jsx|mjs|cjs|ts|tsx|mts|cts)$/);
-  d(options, 'exclude', /node_modules/i);
+  d(options, 'exclude', /[\\/]node_modules[\\/]/);
   d(options, 'library');
   d(options, 'forceEnable', false);
   d(options, 'injectLoader', true);

@@ -160,6 +160,16 @@ describe('react-refresh-rspack-plugin', () => {
     expect(fixture).toContain('function $RefreshReg$');
   });
 
+  it('should include paths that only contain node_modules in the name', async () => {
+    const {
+      outputs: { fixture },
+    } = await compileWithReactRefresh(
+      path.join(import.meta.dirname, 'fixtures/contains-node_modules-name'),
+      {},
+    );
+    expect(fixture).toContain('function $RefreshReg$');
+  });
+
   it('should add library to make sure work in Micro-Frontend', async () => {
     const {
       outputs: { reactRefresh },
