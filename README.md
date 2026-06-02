@@ -11,7 +11,7 @@ React refresh plugin for [Rspack](https://github.com/web-infra-dev/rspack).
 ## Versions
 
 - `2.x`: For Rspack v2.
-- `1.x`: For Rspack v1, see [v1.x - README](https://github.com/rstackjs/rspack-dev-server/tree/v1.x#rspackdev-server) for usage guide.
+- `1.x`: For Rspack v1, see [v1.x - README](https://github.com/rstackjs/rspack-plugin-react-refresh/tree/v1.x?tab=readme-ov-file#rspackplugin-react-refresh) for usage guide.
 
 ## Installation
 
