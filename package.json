@@ -2,6 +2,10 @@
   "name": "@rspack/plugin-react-refresh",
   "version": "2.0.2",
   "repository": "https://github.com/rstackjs/rspack-plugin-react-refresh",
+  "homepage": "https://github.com/rstackjs/rspack-plugin-react-refresh#readme",
+  "bugs": {
+    "url": "https://github.com/rstackjs/rspack-plugin-react-refresh/issues"
+  },
   "license": "MIT",
   "description": "React refresh plugin for Rspack",
   "type": "module",
