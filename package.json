@@ -38,11 +38,11 @@
   },
   "devDependencies": {
     "@rslib/core": "^0.23.2",
-    "@rslint/core": "^0.7.0",
-    "@rspack/core": "2.1.4",
-    "@rstest/core": "^0.11.2",
+    "@rslint/core": "^0.7.2",
+    "@rspack/core": "2.1.7",
+    "@rstest/core": "^0.11.5",
     "@types/node": "^24.13.3",
-    "prettier": "^3.9.5",
+    "prettier": "^3.9.6",
     "react-refresh": "^0.18.0",
     "simple-git-hooks": "^2.13.1",
     "typescript": "^7.0.2"
@@ -56,7 +56,7 @@
       "optional": true
     }
   },
-  "packageManager": "pnpm@11.13.1",
+  "packageManager": "pnpm@11.18.0",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"

@@ -8,12 +8,12 @@
     "preview": "rspack preview"
   },
   "dependencies": {
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7"
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
-    "@rspack/cli": "2.1.4",
-    "@rspack/core": "2.1.4",
+    "@rspack/cli": "2.1.7",
+    "@rspack/core": "2.1.7",
     "@rspack/dev-server": "2.1.0",
     "@rspack/plugin-react-refresh": "workspace:*",
     "@types/react": "^19.2.17",
