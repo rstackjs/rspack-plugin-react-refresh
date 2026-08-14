@@ -38,9 +38,9 @@
   },
   "devDependencies": {
     "@rslib/core": "^0.23.2",
-    "@rslint/core": "^0.7.2",
-    "@rspack/core": "2.1.7",
-    "@rstest/core": "^0.11.5",
+    "@rslint/core": "^0.8.0",
+    "@rspack/core": "2.1.10",
+    "@rstest/core": "^0.11.8",
     "@types/node": "^24.13.3",
     "prettier": "^3.9.6",
     "react-refresh": "^0.18.0",
@@ -56,7 +56,7 @@
       "optional": true
     }
   },
-  "packageManager": "pnpm@11.18.0",
+  "packageManager": "pnpm@11.21.0",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
