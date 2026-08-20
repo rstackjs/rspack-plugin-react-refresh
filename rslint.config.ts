@@ -1,12 +1,24 @@
-import { defineConfig, js, ts } from '@rslint/core';
+import { defineConfig, globals, js, ts } from '@rslint/core';
 
 export default defineConfig([
   js.configs.recommended,
   ts.configs.recommended,
   {
-    files: ['client/**/*', 'test/**/*'],
+    files: ['client/**/*'],
     rules: {
       'no-undef': 'off',
+    },
+  },
+  {
+    files: ['**/*.test.{ts,tsx}'],
+    languageOptions: {
+      globals: globals.rstest,
+    },
+  },
+  {
+    files: ['test/fixtures/url/**/*.mjs'],
+    languageOptions: {
+      globals: globals.browser,
     },
   },
 ]);
