@@ -4,7 +4,7 @@ export default defineConfig([
   js.configs.recommended,
   ts.configs.recommended,
   {
-    files: ['client/**/*'],
+    files: ['client/**/*', 'test/fixtures/url/**/*.mjs'],
     languageOptions: {
       globals: globals.browser,
     },
@@ -39,12 +39,6 @@ export default defineConfig([
     files: ['**/*.test.{ts,tsx}'],
     languageOptions: {
       globals: globals.rstest,
-    },
-  },
-  {
-    files: ['test/fixtures/url/**/*.mjs'],
-    languageOptions: {
-      globals: globals.browser,
     },
   },
 ]);
