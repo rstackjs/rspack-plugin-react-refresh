@@ -5,8 +5,34 @@ export default defineConfig([
   ts.configs.recommended,
   {
     files: ['client/**/*'],
-    rules: {
-      'no-undef': 'off',
+    languageOptions: {
+      globals: globals.browser,
+    },
+  },
+  {
+    files: ['client/reactRefresh.js'],
+    languageOptions: {
+      globals: {
+        __react_refresh_test__: 'readonly',
+      },
+    },
+  },
+  {
+    files: ['client/reactRefreshEntry.js'],
+    languageOptions: {
+      globals: {
+        ...globals.rspack,
+        __react_refresh_library__: 'readonly',
+        process: 'readonly',
+      },
+    },
+  },
+  {
+    files: ['client/refreshUtils.js'],
+    languageOptions: {
+      globals: {
+        __reload_on_runtime_errors__: 'readonly',
+      },
     },
   },
   {
