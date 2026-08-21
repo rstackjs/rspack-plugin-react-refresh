@@ -1,4 +1,3 @@
-/* global __webpack_require__ */
 import {
   getFamilyByType,
   isLikelyComponentType,
