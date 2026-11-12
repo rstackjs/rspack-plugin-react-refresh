@@ -76,6 +76,8 @@ function createDebounceUpdate() {
    * @type {number | undefined}
    */
   let refreshTimeout;
+  /** @type {Array<function(): void>} */
+  let callbacks = [];
 
   /**
    * Performs React Refresh on a delay.
@@ -83,15 +85,20 @@ function createDebounceUpdate() {
    * @returns {void}
    */
   const enqueueUpdate = (callback) => {
+    if (callback) {
+      callbacks.push(callback);
+    }
     if (typeof refreshTimeout !== 'undefined') {
       return;
     }
 
     refreshTimeout = setTimeout(() => {
       refreshTimeout = undefined;
+      const pendingCallbacks = callbacks;
+      callbacks = [];
       performReactRefresh();
-      if (callback) {
-        callback();
+      for (const pendingCallback of pendingCallbacks) {
+        pendingCallback();
       }
     }, 30);
   };
