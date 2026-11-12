@@ -1,6 +1,6 @@
 {
   "name": "@rspack/plugin-react-refresh",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "repository": "https://github.com/rstackjs/rspack-plugin-react-refresh",
   "homepage": "https://github.com/rstackjs/rspack-plugin-react-refresh#readme",
   "bugs": {
